@@ -1,9 +1,9 @@
-'''
+"""
 By: Renato Lulic
 Instagram: renato_lulic
 Date: September 14, 2022
 For instructions or information, please refer to https://github.com/Reno-Codes/ENS-Expiration-Date-Checker/blob/main/README.md
-'''
+"""
 
 from datetime import datetime
 from python_graphql_client import GraphqlClient
@@ -17,9 +17,12 @@ domain = "100.eth"
 def main():
     get_labelhash()
 
+
 # Get labelhash
 def get_labelhash():
-    client = GraphqlClient(endpoint=f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx")   
+    client = GraphqlClient(
+        endpoint=f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx"
+    )
     queryEnsDomain = {"ensDomain": f"{domain}"}
 
     query = """
@@ -58,8 +61,16 @@ def get_expirationDate(client, labelhash, data):
 
     # Print ENS Domain, Registration Date and Expiration Date
     print(f"- [ENS Domain]: {data['data']['domains'][0]['name']}")
-    print("- [Registration Date]:", datetime.fromtimestamp(int(data2['data']["registrations"][0]["registrationDate"])))
-    print("- [Expiration Date]:", datetime.fromtimestamp(int(data2['data']["registrations"][0]["expiryDate"])))
+    print(
+        "- [Registration Date]:",
+        datetime.fromtimestamp(
+            int(data2["data"]["registrations"][0]["registrationDate"])
+        ),
+    )
+    print(
+        "- [Expiration Date]:",
+        datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])),
+    )
 
 
 if __name__ == "__main__":
