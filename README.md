@@ -24,6 +24,10 @@ https://thegraph.com/studio/apikeys/
 API_KEY = "Your-API-Key"
 domain = "101.eth"
 ```
+Run with
+```python
+python ens-checker.py
+```
 
 ## Contributing
 Pull requests are welcome. Change the code based on your needs.
