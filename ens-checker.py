@@ -1,7 +1,7 @@
 '''
 By: Renato Lulic
 Instagram: renato_lulic
-Date: June 12th, 2022
+Date: September 14, 2022
 For instructions or information, please refer to https://github.com/Reno-Codes/ENS-Expiration-Date-Checker/blob/main/README.md
 '''
 
