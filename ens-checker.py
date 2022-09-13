@@ -1,3 +1,10 @@
+'''
+By: Renato Lulic
+Instagram: renato_lulic
+Date: June 12th, 2022
+For instructions or information, please refer to https://github.com/Reno-Codes/ENS-Expiration-Date-Checker/blob/main/README.md
+'''
+
 from datetime import datetime
 from python_graphql_client import GraphqlClient
 
