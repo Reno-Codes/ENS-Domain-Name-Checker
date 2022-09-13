@@ -4,7 +4,7 @@ ENSEDC is a Python program to check expiration date of any ENS domain name using
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Python GraphQL.
 
 ```bash
 pip install python_graphql_client
