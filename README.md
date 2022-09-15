@@ -20,17 +20,20 @@ When you create your first API Key, you get 1000 queries for free.
 https://thegraph.com/studio/apikeys/
 ```
 
+## Run with
+
+```python
+python ens-checker.py
+```
+
 ## Usage
 
 ```python
-API_KEY = "Your-API-Key"
+First get API Key here: https://thegraph.com/studio/apikeys/
+Paste your API Key on the console when your run a ens-checker.py
 
 # Include 90 days of grace period into date (True/False)
 gracePeriod = True
-```
-Run with
-```python
-python ens-checker.py
 ```
 
 ## Contributing
