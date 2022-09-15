@@ -70,8 +70,8 @@ def read_Api():
             temp, API_KEY = formatAPI.replace(" ", "").split("=")
             return API_KEY
 
-    except FileNotFoundError:
-        add_Api()
+    except:
+        return add_Api()
 
 # Ask user to input API Key
 def add_Api():
