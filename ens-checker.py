@@ -36,7 +36,7 @@ def get_labelhash():
     client = GraphqlClient(
         endpoint=f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx"
     )
-    queryEnsDomain = {"ensDomain": f"{domain}"}
+    queryEnsDomain = {"ensDomain": f"{domain.lower()}"}
 
     query = """
     query ensQuery($ensDomain: String) 
@@ -53,7 +53,7 @@ def get_labelhash():
         labelhash = data["data"]["domains"][0]["labelhash"]
         get_expirationDate(client, labelhash, data)
     except IndexError:
-        print(colored(f"{domain} is not registered.", "green"))
+        print(colored(f"{domain.lower()} is not registered.", "green"))
     
     
 
