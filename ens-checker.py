@@ -11,32 +11,47 @@ from datetime import datetime, timedelta
 from python_graphql_client import GraphqlClient
 os.system('color')
 
+print(colored("""
+$$$$$$$$\ $$\   $$\  $$$$$$\  $$$$$$$$\ $$$$$$$\   $$$$$$\  
+$$  _____|$$$\  $$ |$$  __$$\ $$  _____|$$  __$$\ $$  __$$\ 
+$$ |      $$$$\ $$ |$$ /  \__|$$ |      $$ |  $$ |$$ /  \__|
+$$$$$\    $$ $$\$$ |\$$$$$$\  $$$$$\    $$ |  $$ |$$ |      
+$$  __|   $$ \$$$$ | \____$$\ $$  __|   $$ |  $$ |$$ |      
+$$ |      $$ |\$$$ |$$\   $$ |$$ |      $$ |  $$ |$$ |  $$\ 
+$$$$$$$$\ $$ | \$$ |\$$$$$$  |$$$$$$$$\ $$$$$$$  |\$$$$$$  |
+\________|\__|  \__| \______/ \________|\_______/  \______/
+""", "yellow"))
+print(colored("ENS Expiration Date Checker by Reno-Codes", "green"))
+print("Github: ", colored("https://github.com/Reno-Codes/ENS-Expiration-Date-Checker", "cyan"),"\n")
+
+
 # Read readme.md
 # Get API KEY on -> https://thegraph.com/studio/apikeys/
 API_KEY = "Your-API-Key"
-domain = "100.eth"
 
 # Include 90 days of grace period into date (True/False)
 gracePeriod = True
 
 
 def main():
-    try:
-        name, extension = domain.lower().split(".")
-        if extension == "eth":
-            get_labelhash()
-        else:
-            print(colored("ENS Domain must end with '.eth'", "red"))
-    except ValueError:
-        print(colored("ENS Domain can contain only 1 dot (example.eth)", "red"))
+    while True:
+        domain = input("Check ENS domain: ")
+        try:
+            name, extension = domain.lower().split(".")
+            if extension == "eth":
+                get_labelhash(domain)
+            else:
+                print(colored("ENS Domain must end with '.eth'", "red"))
+        except ValueError:
+            print(colored("ENS Domain can contain only 1 dot (example.eth)", "red"))
 
 
 # Get labelhash
-def get_labelhash():
+def get_labelhash(d):
     client = GraphqlClient(
         endpoint=f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx"
     )
-    queryEnsDomain = {"ensDomain": f"{domain.lower()}"}
+    queryEnsDomain = {"ensDomain": f"{d.lower()}"}
 
     query = """
     query ensQuery($ensDomain: String) 
@@ -53,7 +68,7 @@ def get_labelhash():
         labelhash = data["data"]["domains"][0]["labelhash"]
         get_expirationDate(client, labelhash, data)
     except IndexError:
-        print(colored(f"{domain.lower()} is not registered.", "green"))
+        print(colored(f"{d.lower()} is not registered.", "green"))
     
     
 
@@ -92,7 +107,7 @@ def get_expirationDate(client, labelhash, data):
         grace = datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"]))
         modified_date = grace + timedelta(days=90)
         formattedGraceDate = modified_date.strftime("%b %d, %Y at %H:%M")
-        print(colored("- [Grace Period Expiration]:", "red"), modified_date, "(", colored(formattedGraceDate, "red", attrs=["bold"]), ")")
+        print(colored("- [Grace Period Expiration]:", "red"), modified_date, "(", colored(formattedGraceDate, "red", attrs=["bold"]), ")\n")
 
 
 if __name__ == "__main__":

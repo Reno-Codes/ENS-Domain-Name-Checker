@@ -2,6 +2,8 @@
 
 ENSEDC is a Python program to check expiration date of any ENS domain name using Python GraphQL.
 
+![](https://github.com/Reno-Codes/ENS-Expiration-Date-Checker/blob/main/ens-checker.png)
+
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Python GraphQL.
@@ -22,7 +24,6 @@ https://thegraph.com/studio/apikeys/
 
 ```python
 API_KEY = "Your-API-Key"
-domain = "101.eth"
 
 # Include 90 days of grace period into date (True/False)
 gracePeriod = True
