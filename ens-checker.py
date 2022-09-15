@@ -21,7 +21,14 @@ gracePeriod = True
 
 
 def main():
-    get_labelhash()
+    try:
+        name, extension = domain.lower().split(".")
+        if extension == "eth":
+            get_labelhash()
+        else:
+            print(colored("ENS Domain must end with '.eth'", "red"))
+    except ValueError:
+        print(colored("ENS Domain can contain only 1 dot (example.eth)", "red"))
 
 
 # Get labelhash
@@ -41,10 +48,14 @@ def get_labelhash():
         }
     }
     """
-
-    data = client.execute(query=query, variables=queryEnsDomain)
-    labelhash = data["data"]["domains"][0]["labelhash"]
-    get_expirationDate(client, labelhash, data)
+    try:
+        data = client.execute(query=query, variables=queryEnsDomain)
+        labelhash = data["data"]["domains"][0]["labelhash"]
+        get_expirationDate(client, labelhash, data)
+    except IndexError:
+        print(colored(f"{domain} is not registered.", "green"))
+    
+    
 
 
 # Get Expiration Date from ENS Domain labelhash
