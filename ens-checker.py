@@ -13,7 +13,7 @@ os.system('color')
 
 # Read readme.md
 # Get API KEY on -> https://thegraph.com/studio/apikeys/
-API_KEY = "e13b252c43ffc91724a27e33672a7df8"
+API_KEY = "Your-API-Key"
 domain = "100.eth"
 
 # Include 90 days of grace period into date (True/False)
