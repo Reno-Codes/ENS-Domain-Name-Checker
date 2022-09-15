@@ -23,6 +23,9 @@ https://thegraph.com/studio/apikeys/
 ```python
 API_KEY = "Your-API-Key"
 domain = "101.eth"
+
+# Include 90 days of grace period into date (True/False)
+gracePeriod = True
 ```
 Run with
 ```python
