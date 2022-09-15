@@ -5,13 +5,19 @@ Date: September 14, 2022
 For instructions or information, please refer to https://github.com/Reno-Codes/ENS-Expiration-Date-Checker/blob/main/README.md
 """
 
-from datetime import datetime
+import os
+from termcolor import colored
+from datetime import datetime, timedelta
 from python_graphql_client import GraphqlClient
+os.system('color')
 
 # Read readme.md
 # Get API KEY on -> https://thegraph.com/studio/apikeys/
 API_KEY = "Your-API-Key"
 domain = "100.eth"
+
+# Include 90 days of grace period into date (True/False)
+gracePeriod = True
 
 
 def main():
@@ -59,18 +65,23 @@ def get_expirationDate(client, labelhash, data):
 
     data2 = client.execute(query=query2, variables=queryEnsLabelhash)
 
-    # Print ENS Domain, Registration Date and Expiration Date
-    print(f"- [ENS Domain]: {data['data']['domains'][0]['name']}")
-    print(
-        "- [Registration Date]:",
-        datetime.fromtimestamp(
-            int(data2["data"]["registrations"][0]["registrationDate"])
-        ),
-    )
-    print(
-        "- [Expiration Date]:",
-        datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])),
-    )
+    # Print ENS Domain
+    print(colored("- [ENS Domain]:", "green"), f"{data['data']['domains'][0]['name']}")
+
+    # Print Registration Date
+    print(colored("- [Registration Date]:", "green"), datetime.fromtimestamp(int(data2["data"]["registrations"][0]["registrationDate"])), 
+    "(", datetime.fromtimestamp(int(data2["data"]["registrations"][0]["registrationDate"])).strftime("%b %d, %Y at %H:%M"), ")")
+
+    # Print Expiration Date
+    print(colored("- [Expiration Date]:", "yellow"), datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])),
+    "(", colored(datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])).strftime("%b %d, %Y at %H:%M"), "yellow"), ")")
+
+    # Print Grace Period Calculation
+    if gracePeriod:
+        grace = datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"]))
+        modified_date = grace + timedelta(days=90)
+        formattedGraceDate = modified_date.strftime("%b %d, %Y at %H:%M")
+        print(colored("- [Grace Period Expiration]:", "red"), modified_date, "(", colored(formattedGraceDate, "red"), ")")
 
 
 if __name__ == "__main__":
