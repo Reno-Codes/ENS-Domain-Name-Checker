@@ -13,7 +13,7 @@ os.system('color')
 
 # Read readme.md
 # Get API KEY on -> https://thegraph.com/studio/apikeys/
-API_KEY = "Your-API-Key"
+API_KEY = "e13b252c43ffc91724a27e33672a7df8"
 domain = "100.eth"
 
 # Include 90 days of grace period into date (True/False)
@@ -74,14 +74,14 @@ def get_expirationDate(client, labelhash, data):
 
     # Print Expiration Date
     print(colored("- [Expiration Date]:", "yellow"), datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])),
-    "(", colored(datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])).strftime("%b %d, %Y at %H:%M"), "yellow"), ")")
+    "(", colored(datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"])).strftime("%b %d, %Y at %H:%M"), "yellow", attrs=["bold"]), ")")
 
     # Print Grace Period Calculation
     if gracePeriod:
         grace = datetime.fromtimestamp(int(data2["data"]["registrations"][0]["expiryDate"]))
         modified_date = grace + timedelta(days=90)
         formattedGraceDate = modified_date.strftime("%b %d, %Y at %H:%M")
-        print(colored("- [Grace Period Expiration]:", "red"), modified_date, "(", colored(formattedGraceDate, "red"), ")")
+        print(colored("- [Grace Period Expiration]:", "red"), modified_date, "(", colored(formattedGraceDate, "red", attrs=["bold"]), ")")
 
 
 if __name__ == "__main__":
