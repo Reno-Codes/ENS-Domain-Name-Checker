@@ -40,9 +40,6 @@ Choose an option
 [3] - Generate random ENS domains and check them
 ```
 
-## Contributing
-Pull requests are welcome. Change the code based on your needs.
-
 ## Donate for coffee <3
 ```bash
 Eth address: 0xcEadac5eD63baB246Fb40CfdDbbfBF6ee4B6E7E3
