@@ -14,7 +14,7 @@ if start_Number < 100:
     print(colored("\nENS domain must contain at least 3 digits!\nLowest number is 100 (100.eth)", "red"))
 else:
     for i in range(start_Number, end_Number + 1):
-        with open("domains.txt", "a") as file:
+        with open("number-domains.txt", "a") as file:
             file.write(str(start_Number) + ".eth\n")
             start_Number += 1
     print(colored("\nFinished.", "green"))
